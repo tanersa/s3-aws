@@ -1,0 +1,15 @@
+Date: 11/14/2021  S3 (Simple Storage Services)
+
+1. Bucket names must be globally unique
+2. Even though S3 is a global service we must choose the region from dropdown because of each regions 
+data compliance/regulations
+3. By default S3 buckets are private. (ACLs are blocked)
+4. Again we have to build cost-optimized infrastructure. 
+5. After certain time we need to move certain to to cheaper storage. For this we use S3 Lifecycle policies
+
+Prevent Accidential Deletion of data (Object) in S3 bucket.
+1. For this we use Versioning.
+
+How do you grant connectivity to S3 buckets without using Internet?
+
+VPC endpoint --> https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints.html
