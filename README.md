@@ -33,5 +33,60 @@
                   "Default": "t2.micro",
                   "AllowedValues": ["t2.micro", "t2.small"]
               }
+              
+              
+   -  Next we better having mappings which will help us to map our EC2 instances to different regions because each region would have seperate Amazon Machine                     Images (AMIs) even though name of the instance called same (such as Amazon Linux).
+
+
+               "Mappings": {
+                    "AMIs": {
+                        "us-east-1": {
+                            "Name": "ami-04ad2567c9e3d7893"
+                        },
+                        "us-east-2": {
+                            "Name": "ami-0dd0ccab7e2801812"
+                        },
+                        "us-west-1": {
+                            "Name": "ami-0074ef78ecb07948c"
+                          }
+                      }
+                },
+                
+                
+                
+                
+                
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+              
+              
+              
+              
+              
+              
+              
+              
 
     
