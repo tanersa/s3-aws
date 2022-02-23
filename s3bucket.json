@@ -74,6 +74,7 @@
                 ]
             }
         },
+        
         "MySG": {
             "Type": "AWS::EC2::SecurityGroup",
             "Properties": {
