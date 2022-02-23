@@ -96,10 +96,76 @@
                       },
                 
                 
+   -  We also need to have a security group (SG) to ssh access for EC2 instance.
+
+
+                 "MySG": {
+                      "Type": "AWS::EC2::SecurityGroup",
+                      "Properties": {
+                          "VpcId": {
+                              "Ref": "myVPC"
+                          },
+                          "GroupDescription": "Allow SSH Access",
+                          "SecurityGroupIngress": [
+                              {
+                                  "CidrIp" : "0.0.0.0/0",
+                                  "FromPort" : 22,
+                                  "IpProtocol" : "tcp",
+                                  "ToPort" : 22
+                              }
+                          ],
+                          "Tags": [
+                              {
+                                  "Key": "Name",
+                                  "Value": "EC2-S3-SG"
+                              }
+                          ]
+                      }
+                  },
      
      
-     
-     
+   -  In order to have access to list of S3 Buckets, we need an InstanceProfile for IAM Role.
+
+
+                   "ListBuckets": {
+                    "Type" : "AWS::IAM::InstanceProfile",
+                    "Properties" : {
+                        "Path" : "/",
+                        "Roles" : [ 
+                            {
+                                "Ref": "S3BucketRole"
+                            }
+                         ]
+                      }
+                  },
+                  
+                  
+   -  Let's add a Buccket Policy to be allowed to list and create buckets with correct permissions.
+
+
+                  "S3BucketPolicy": {
+                        "Type" : "AWS::IAM::Policy",
+                        "Properties" : {
+                            "PolicyName" : "S3BucketPolicy",
+                            "PolicyDocument" : {
+                                "Statement": [
+                                    {
+                                        "Effect": "Allow",
+                                        "Action": [
+                                            "s3:List*",
+                                            "s3:CreateBucket"
+                                        ],
+                                        "Resource": "*"
+                                    }
+                                ]
+                            },
+                            "Roles" : [ 
+                                {
+                                    "Ref": "S3BucketRole"
+                                }
+                             ]
+                          }
+                      },
      
      
      
