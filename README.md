@@ -53,7 +53,47 @@
                 },
                 
                 
-                
+   -  Let's add our resources now. **EC2WithRole** will be our first resource to add. Furthermore, our properties will include **InstanceType, SubnetId, ImageId,         KeyName, IamInstanceProfile, SecurityGroupIds and Tags.** Here, we use **intrinsic function** to achieve our AMI IDs dynamically and that is **Fn::FindInMap**.         This function will allow us to select AMI ID based on the region and will use the value for **Name** key.
+
+
+                 "Resources": {
+                      "EC2WithRole": {
+                          "Type": "AWS::EC2::Instance",
+                          "Properties": {
+                              "InstanceType": {
+                                  "Ref": "InstanceType"
+                              },
+                              "SubnetId": {
+                                  "Ref": "mySubnet"
+                              },
+                              "ImageId": {
+                                  "Fn::FindInMap": [
+                                      "AMIs",
+                                      {
+                                          "Ref": "AWS::Region"
+                                      },
+                                      "Name"
+                                  ]
+                              },
+                              "KeyName": {
+                                  "Ref": "KeyName"
+                              },
+                              "IamInstanceProfile": {
+                                  "Ref": "ListBuckets"
+                              },
+                              "SecurityGroupIds": [
+                                  {
+                                      "Ref": "MySG"
+                                  }
+                              ],
+                              "Tags": [
+                                  {
+                                      "Key": "Name",
+                                      "Value": "EC2WithRole"
+                                  }
+                              ]
+                          }
+                      },
                 
                 
      
