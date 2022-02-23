@@ -143,7 +143,7 @@
    -  Let's add a Buccket Policy to be allowed to list and create buckets with correct permissions.
 
 
-                  "S3BucketPolicy": {
+                   "S3BucketPolicy": {
                         "Type" : "AWS::IAM::Policy",
                         "Properties" : {
                             "PolicyName" : "S3BucketPolicy",
@@ -168,9 +168,38 @@
                       },
      
      
+   -  Lastly, we add our IAM Role for integrating our policies with other AWS services in this case EC2 and S3 Bucket. 
+
+
+          
+                         "S3BucketRole": {
+                            "Type" : "AWS::IAM::Role",
+                            "Properties" : {
+                                "AssumeRolePolicyDocument" : {
+                                    "Version": "2012-10-17",
+                                    "Statement": [
+                                        {
+                                            "Effect": "Allow",
+                                            "Principal": {
+                                                "Service": ["ec2.amazonaws.com"]
+                                            },
+                                            "Action": [
+                                                "sts:AssumeRole"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "Path" : "/"
+                          }
+                          }
+                          }
      
      
-     
+   
+   Now, we can deploy this CFT by going AWS Console and opening CloudFormation service then create our stack. Above CFT template simply would be pasted for template section then deploy the template as is.
+   
+   - After our deployment, you can verify IAM Roles, security group under EC2 service.
+   - Go to Ohio region and verify healthy instances, and healthy security groups. 
      
      
      
