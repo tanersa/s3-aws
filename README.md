@@ -191,12 +191,13 @@
                                 },
                                 "Path" : "/"
                           }
-                          }
-                          }
+                     }
+                }
      
      
    
-   Now, we can deploy this CFT by going AWS Console and opening CloudFormation service then create our stack. Above CFT template simply would be pasted for template section then deploy the template as is.
+   Now, we can deploy this CFT by going AWS Console and opening CloudFormation service then create our stack. Above CFT template simply would be pasted 
+   for template section then deploy the template as is.
    
    - After our deployment, you can verify IAM Roles, security group under EC2 service.
    - Go to Ohio region and verify healthy instances, and healthy security groups. 
